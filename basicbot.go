@@ -12,7 +12,7 @@ import (
 //Result is a struct for a channel to return, incase the Bot has an error
 type Result struct{
 	Source string //The bot that called the error
-	Message string //Message to explain where eerror occured
+	Message string //Message to explain where error occurred
 	Error error //The error itself
 }
 //ErrorChannel is a channel you should listen to for any errors that come back across the bots
@@ -56,14 +56,8 @@ func (b *BasicBot) ConnectToChat() {
 	}()
 }
 
-/* //If the message is never sent due to a loss of internet, the bot will never know
-func (b *BasicBot) SendMessage(msg irc.Message) {
-	err := b.Client.WriteMessage(&msg)
-	rs := Result{Error: err, Source: b.ID, Message: "Error sending message"}
-	ErrorChannel <- rs
-} */
-
 //SendMessage sends a string, and attaches all the headers that you need to send a message to the current channel
+//If the bot losses connection to the internet, it never knows, need to fix
 func (b *BasicBot) SendMessage(msg string) {
 	fmsg := irc.Message{}
 	fmsg.Command = "PRIVMSG"
