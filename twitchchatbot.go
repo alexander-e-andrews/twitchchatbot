@@ -1,7 +1,6 @@
 package twitchchatbot
 
 import (
-	"fmt"
 	"net"
 
 	"gopkg.in/irc.v3"
